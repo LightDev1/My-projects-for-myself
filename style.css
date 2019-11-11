@@ -1,0 +1,68 @@
+body {
+    color: #C0C0C0;
+    font-size: 24px;
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.start__list {
+    display: block;
+}
+
+input[type="text"] {
+    display: inline-block;
+    width: 240px;
+    height: 32px;
+}
+
+.todo__del {
+    display: block;
+}
+
+input[type="submit"] {
+    background: transparent;
+    border: none;
+    color: #C0C0C0;
+    width: 80px;
+    height: 29px;
+    font-size: 20px;
+}
+
+input[type="submit"]:hover, 
+.start__list:hover,
+.todo__del:hover {
+    color: #8B8B8B;
+}
+
+.task {
+    
+    color: #000000;
+    font-size: 25px;
+    margin-left: 80px;
+}
+
+.del {
+    display: inline-block;
+    width: 42px;
+    height: auto;
+    font-size: 22px;
+    font-weight: 900;
+	text-align: center;
+	color: #ccc;
+    }
+
+.del:hover {
+    display: inline-block;
+	color: #ffffff;
+    background-color: Red;
+}
+
+.check {
+    margin-left: 25px;
+}
+
+.checked {
+    list-style: none;
+    color: #C0C0C0;
+    text-decoration: line-through;
+}

@@ -9,8 +9,8 @@
     <body>
         <div class="todo__container">
             <span class="start__list">Начать новый список</span>
-            <input type="text" placeholder="Что надо сделать">
-            <span class="todo__del">Удалить выполненные</span>
+            <input type="text" id="write__task" placeholder="Что надо сделать?">
+            <input type="submit" id="sent" value="ENTER">
             <div class="not__finisheds">
                 <ol class="working">
 
@@ -18,10 +18,13 @@
             </div>
             <div class="finisheds">
                 <ul class="completes">
-                    
+                
                 </ul>
+
+            <span class="todo__del">Удалить выполненные</span>
             </div>
         </div>
+        
         <script src="./script.js"></script>
     </body>
 </html>
