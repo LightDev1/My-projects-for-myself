@@ -8,7 +8,7 @@ const start = document.querySelector('.start__list'),
 
 
 const addTask = (event) => {
-    
+
     let li = document.createElement('li');
     li.classList.add('task');
     li.innerHTML = writeTask.value;
@@ -16,7 +16,12 @@ const addTask = (event) => {
         return;
     }
     working.appendChild(li);
+
+    
+
     writeTask.value = '';
+   
+   
 
     let check = document.createElement('input');
     check.type = 'checkbox';
@@ -42,8 +47,23 @@ const addTask = (event) => {
 
 }
 
+const saveList = (list) => {
+    let date = new Date(Date.now() + 86400e3);
+    setCookie('data', list, {expires: date});
+    let olList = getCookie('data');
+    console.log(olList);
+    if (working.innerHTML == '') {
+        working.insertAdjacentHTML('afterbegin', olList);
+    }
+    
+    saveList(working.innerHTML);
+}
 
-enter.addEventListener('click', addTask);
+
+enter.addEventListener('click', () => {
+    addTask();
+    saveList(working.innerHTML);
+});
 
 start.addEventListener('click', () => {
     working.innerHTML = '';
@@ -58,4 +78,6 @@ writeTask.addEventListener('keydown', (event) => {
         addTask();
     }
 });
+
+
 
