@@ -5,12 +5,13 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
   }
 
-  let date = new Date(Date.now() + 86400e3);
+  let date = new Date(Date.now() + 2678400000);
   
   function setCookie(name, value, options = {expires: date}) {
   
     options = {
       path: '/',
+    
     };
   
     if (options.expires.toUTCString) {

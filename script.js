@@ -5,37 +5,70 @@ const start = document.querySelector('.start__list'),
     working = document.querySelector('.working'),
     finisheds = document.querySelector('.completes');
   
+let notReady = [];
+let ready = [];
 
 
-const addTask = (event) => {
-
-    let li = document.createElement('li');
+let li = document.createElement('li');
     li.classList.add('task');
-    li.innerHTML = writeTask.value;
+    li.innerHTML = 'fdfddfdf';
+    working.appendChild(li);
+
+
+const createList = () => {
+
     if (writeTask.value == '') {
         return;
     }
+
+    let listItem = writeTask.value;
+    notReady.push(listItem);
+    ready.push(listItem);
+    
+    console.log(ready);
+    let result = notReady.join();
+    let date = new Date(Date.now() + 86400e3);
+    
+    setCookie('dataList', result, {expires: date});
+    
+};
+
+const addTask = (event) => {
+
+    if (writeTask.value == '') {
+        return;
+    }
+
+    createList();
+
+    data = getCookie('dataList');
+    console.log(data);
+    
+    dataArray = data.split(',');
+    console.log(dataArray);
+
+    dataArray.forEach(item => {
+
+    let li = document.createElement('li');
+    li.classList.add('task');
+    li.innerHTML = item;
     working.appendChild(li);
 
+    addCheck(li);
+    addDel(li);
+
+});
+
+    notReady = [];
     
-
     writeTask.value = '';
-   
-   
+}
 
+const addCheck = (li) => {
     let check = document.createElement('input');
     check.type = 'checkbox';
     check.classList.add('check');
     li.insertAdjacentElement('beforeend', check);
-
-    let del = document.createElement('span');
-    del.classList.add('del');
-    del.innerHTML = '×';
-    li.insertAdjacentElement('beforeend', del);
-
-    del.addEventListener('click', () => {
-        li.remove();
-    });
 
     check.addEventListener('click', () => {
         finisheds.appendChild(li);
@@ -44,25 +77,27 @@ const addTask = (event) => {
             working.appendChild(li);
         }
     });
-
 }
 
-const saveList = (list) => {
-    let date = new Date(Date.now() + 86400e3);
-    setCookie('data', list, {expires: date});
-    let olList = getCookie('data');
-    console.log(olList);
-    if (working.innerHTML == '') {
-        working.insertAdjacentHTML('afterbegin', olList);
-    }
+const addDel = (li) => {
+    let del = document.createElement('span');
+    del.classList.add('del');
+    del.innerHTML = '×';
+    li.insertAdjacentElement('beforeend', del);
+
+    del.addEventListener('click', () => {
+        li.remove();
+    });
+}
+
+
     
-    saveList(working.innerHTML);
-}
+   
+
 
 
 enter.addEventListener('click', () => {
     addTask();
-    saveList(working.innerHTML);
 });
 
 start.addEventListener('click', () => {
@@ -80,4 +115,29 @@ writeTask.addEventListener('keydown', (event) => {
 });
 
 
+
+function caching() {
+
+    if (writeTask.value == '') {
+        return;
+    }
+
+    let ourCache = ready.join();
+    let date = new Date(Date.now() + 86400e3);
+    
+    setCookie('newDataList', ourCache, {expires: date});
+
+    let newList = getCookie('dataList');
+
+    let listArray = newList.split(',');
+
+    listArray.forEach(item => {
+        let li = document.createElement('li');
+        li.classList.add('task');
+        li.innerHTML = item;
+        working.appendChild(li);
+        });
+}
+
+caching();
 
